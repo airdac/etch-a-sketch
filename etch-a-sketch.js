@@ -2,14 +2,14 @@ const grid = document.querySelector(".grid");
 const gridWidth = parseFloat(getComputedStyle(grid).width);
 
 let gridSize = 16;
-const maxGridSize = 40;
+const maxGridSize = 100;
 
 function createGrid(gridSize) {
     for (let i = 0; i < gridSize ** 2; i++) {
     let square = document.createElement("div");
     square.classList.add("square");
 
-    let squareSide = Math.floor(gridWidth / gridSize);
+    let squareSide = gridWidth / gridSize;
     square.style.width = `${squareSide}px`;
 
     // Remove extra borders
@@ -33,7 +33,18 @@ grid.addEventListener("mouseover", (event) => {
     const target = event.target;
 
     if (target.classList.contains("square")) {
-        target.style.background = "black";
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+        
+        let background = target.style.background
+        let alphaMatch = background.match(
+            /rgba?\([^,]+,\s*[^,]+,\s*[^,]+,\s*([^)]+)/
+        );
+        let alpha = alphaMatch ? parseFloat(alphaMatch[1]) + 0.1 : 0.1;
+        alpha = Math.min(alpha, 1);
+
+        target.style.background = `rgba(${r}, ${g}, ${b}, ${alpha})`;
     }
 });
 
