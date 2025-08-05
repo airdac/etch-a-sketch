@@ -1,7 +1,7 @@
 const grid = document.querySelector(".grid");
 const gridWidth = parseFloat(getComputedStyle(grid).width);
 
-let gridSize = 4;
+let gridSize = 16;
 const maxGridSize = 40;
 
 function createGrid(gridSize) {
@@ -41,7 +41,10 @@ const resizeButton = document.querySelector("button");
 
 resizeButton.addEventListener('click', () => {
     do {gridSize = parseInt(prompt(`Choose the size of the grid's sides (max. ${maxGridSize}).`));
-    } while (isNaN(gridSize) || gridSize > maxGridSize)
+    } while (isNaN(gridSize)
+        || gridSize <= 0
+        || gridSize > maxGridSize
+    )
 
     empty(grid);
     createGrid(gridSize);
