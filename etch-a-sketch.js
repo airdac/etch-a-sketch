@@ -29,7 +29,7 @@ function empty(grid) {
 createGrid(gridSize);
 
 // Add hovering effect
-grid.addEventListener("mousedown", (event) => {
+grid.addEventListener("mouseover", (event) => {
     const target = event.target;
 
     if (target.classList.contains("square")) {
